@@ -2,7 +2,6 @@ import type { RequestEvent } from "@sveltejs/kit";
 import { Chalk } from "chalk";
 import select, { frameList } from "$lib/curl/frames";
 import { color, colors } from "$lib/curl";
-import { Readable, Stream } from "stream";
 const chalk = new Chalk({
   level: 2,
 });
