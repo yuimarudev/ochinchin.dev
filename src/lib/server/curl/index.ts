@@ -17,13 +17,13 @@ export default async function handleRequest(
   const readable = new ReadableStream({
     start(controller) {
       const tid = setInterval(() => {
+        controller.enqueue("\x1b[2J\x1b[3J\x1b[H");
         const i = frame >= frames.length ? (frame = 0) : frame++;
         const newColor = (previousColor = color(previousColor));
 
         try {
           // @ts-ignore
           controller.enqueue(chalk[colors[newColor]](frames[i]));
-          controller.enqueue("\x1b[2J\x1b[3J\x1b[H");
         } catch (e) {
           clearInterval(tid);
         }
