@@ -1,7 +1,10 @@
 import type { RequestEvent } from "@sveltejs/kit";
-import chalk from "chalk";
+import { Chalk } from "chalk";
 import select, { frameList } from "$lib/curl/frames";
 import { color, colors } from "$lib/curl";
+const chalk = new Chalk({
+  level: 2,
+});
 
 export default async function handleRequest(
   event: RequestEvent<Partial<Record<string, string>>, string | null>
@@ -24,7 +27,7 @@ export default async function handleRequest(
         } catch (e) {
           clearInterval(tid);
         }
-      }, 100);
+      }, 70);
     },
   });
 
