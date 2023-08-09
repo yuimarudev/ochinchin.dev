@@ -10,10 +10,11 @@
   let frame = 0;
   let previousColor = 0;
   let style = "";
+  let url = new URL("https://example.com/");
 
   onMount(() => {
     if (browser) {
-      const url = new URL(location.href);
+      url = new URL(location.href);
       const frames = frameList[url.searchParams.get("name")!] ?? select();
 
       history.replaceState({}, "", url);
@@ -31,14 +32,28 @@
 </script>
 
 <div class="main">
-  <div class="wrapper">
-    <pre {style}>{text}</pre>
+  <div class="wrapper margin-bottom">
+    <pre class="text" {style}>{text}</pre>
   </div>
-  <a href="https://github.com/yuimarudev/ochinchin.dev">GitHub</a>
+  <a class="margin-bottom" href="https://github.com/yuimarudev/ochinchin.dev"
+    >GitHub</a
+  >
+  <p>Also available in curl</p>
+  <p class="label">Click on the URL to copy</p>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+  <pre
+    on:click={async () => {
+      await navigator.clipboard
+        .writeText(url.href)
+        .then(() => alert("Copied!"))
+        .catch(() => alert("Error"));
+    }}
+    class="margin-bottom"><code>curl {url}</code></pre>
 </div>
 
 <style>
-  pre {
+  .text {
     font-family: Arial, Helvetica, sans-serif;
   }
 
@@ -51,6 +66,18 @@
 
   .wrapper {
     margin-top: 2rem;
-    margin-bottom: 3rem;
+  }
+
+  .margin-bottom {
+    margin-bottom: 2rem;
+  }
+
+  .label {
+    font-size: small;
+    color: gray;
+  }
+
+  pre {
+    font-size: larger;
   }
 </style>
