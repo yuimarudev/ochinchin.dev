@@ -1,18 +1,7 @@
 import type { RequestEvent } from "@sveltejs/kit";
 import chalk from "chalk";
-import select, { frameList } from "./frames";
-
-const colors = ["red", "yellow", "green", "blue", "magenta", "cyan", "white"];
-
-const color = (previousColor: number) => {
-  let color;
-
-  do {
-    color = Math.floor(Math.random() * colors.length);
-  } while (color === previousColor);
-
-  return color;
-};
+import select, { frameList } from "$lib/curl/frames";
+import { color, colors } from "$lib/curl";
 
 export default async function handleRequest(
   event: RequestEvent<Partial<Record<string, string>>, string | null>
@@ -32,7 +21,7 @@ export default async function handleRequest(
           // @ts-ignore
           controller.enqueue(chalk[colors[newColor]](frames[i]));
           controller.enqueue("\x1b[2J\x1b[3J\x1b[H");
-        } catch {
+        } catch (e) {
           clearInterval(tid);
         }
       }, 100);

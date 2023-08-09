@@ -162,9 +162,9 @@ const tradional = [
 ⣊⡺⣻⣟⣻⣿⣟⣮⣝⡻⣻⡱⠱⡐⠐⠄⠄⠄⠄⠄⠁`,
 ];
 
+// `small` is difficult to see, so it is excluded for now.
 export const frameList: { [key: string]: string[] } = {
   simple,
-  small,
   big,
   tradional,
 };
