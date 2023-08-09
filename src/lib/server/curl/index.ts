@@ -2,15 +2,7 @@ import type { RequestEvent } from "@sveltejs/kit";
 import chalk from "chalk";
 import select, { frameList } from "./frames";
 
-const colors = [
-  "red",
-  "yellow",
-  "green",
-  "blue",
-  "magenta",
-  "cyan",
-  "white"
-];
+const colors = ["red", "yellow", "green", "blue", "magenta", "cyan", "white"];
 
 const color = (previousColor: number) => {
   let color;
