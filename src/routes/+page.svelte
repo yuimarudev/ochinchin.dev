@@ -45,7 +45,7 @@
   <pre
     on:click={async () => {
       await navigator.clipboard
-        .writeText(url.href)
+        .writeText("curl " + url.href)
         .then(() => alert("Copied!"))
         .catch(() => alert("Error"));
     }}
